@@ -5006,7 +5006,7 @@ class Button(Element):
         target = self.Target
         target_element = None
 
-        if target[0] == ThisRow:
+        if isinstance(target, tuple) and target[0] == ThisRow:
             target = [self.Position[0], target[1]]
             if target[1] < 0:
                 target[1] = self.Position[1] + target[1]
@@ -5023,7 +5023,7 @@ class Button(Element):
                 pass
             # if target not found or the above try got exception, then keep looking....
             if target_element is None:
-                if not isinstance(target, str):
+                if isinstance(target, tuple) and  not isinstance(target, str):
                     if target[0] < 0:
                         target = [self.Position[0] + target[0], target[1]]
                     target_element = self.ParentContainer._GetElementAtLocation(target)
